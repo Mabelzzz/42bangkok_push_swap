@@ -26,7 +26,7 @@ void	sort_hundred(t_stc *stack, t_list **lst, char st)
 	// printf("\nbefore push = %d cnt = %d  range = %d\n",stack->push, stack->cnt, stack->range);
 	// push_b(stack, 1);
 	printf("push = %d cnt = %d  range = %d chunk = %d --%d\n",stack->push, stack->cnt, stack->range, stack->chunk, stack->cnt/stack->chunk);
-	// find_max(stack);
+	find_max(stack);
 	// sort_ab(stack, 1);
 	// sort_ab(stack, 1);
 	// sort_ab(stack, 1);

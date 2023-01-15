@@ -3,7 +3,7 @@
 void	sort_four(t_stc *stack, int min)
 {
 	push_min_b(stack, min);
-	sort_three(stack, &stack->a, 'a');
+	sort_three_min(stack, &stack->a, 'a');
 	pa(stack);
 }
 
@@ -11,7 +11,7 @@ void	sort_five(t_stc *stack, int min)
 {
 	push_min_b(stack, min);
 	push_min_b(stack, min + 1);
-	sort_three(stack, &stack->a, 'a');
+	sort_three_min(stack, &stack->a, 'a');
 	pa(stack);
 	pa(stack);
 }

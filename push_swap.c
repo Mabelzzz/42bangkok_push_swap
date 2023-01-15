@@ -54,18 +54,23 @@
 	// 	stack.a = stack.a->next;
 	// }
 // }
-
+void	init(t_stc *stack)
+{
+	stack->cnt = 0;
+	stack->min = 0;
+	stack->push = 0;
+	stack->med = 0;
+	stack->round = 0;
+	stack->a = NULL;
+	stack->b = NULL;
+	stack->tmp = NULL;
+}
 
 int	main(int argc, char **argv)
 {
 	t_stc	stack;
 
-	stack.cnt = 0;
-	stack.min = 0;
-	stack.push = 0;
-	stack.a = NULL;
-	stack.b = NULL;
-	stack.tmp = NULL;
+	init(&stack);
 	if (argc < 2)
 		error();
 	get_val(&stack, argc, argv);
@@ -76,7 +81,7 @@ int	main(int argc, char **argv)
 	stack.chunk = (stack.cnt / 100) + 3;
 	// stack.chunk = 3;
 	stack.range = stack.cnt / stack.chunk;
-	sort_bylen(&stack, stack.cnt);
+	sort_bylen_min(&stack, &stack.a, 'a', stack.cnt);
 	while (stack.a)
 	{
 		printf("a = %d ---- id = %d\n", stack.a->val, stack.a->id);
@@ -92,22 +97,30 @@ int	main(int argc, char **argv)
 	free_lst(stack.b);
 }
 
-void	sort_bylen(t_stc *stack, int len)
+void	sort_bylen_min(t_stc *stack, t_list **lst, char st, int len)
 {
 	if (len == 2)
-		sort_two(stack);
+		sort_two_min(lst, st);
 	else if (len == 3)
-		sort_three(stack, &stack->a, 'a');
+		sort_three_min(stack, lst, st);
 	// else if (len == 4)
 	// 	sort_four(stack, stack->min);
-	else if (len == 5)
-		sort_five(stack, stack->min);
-	// else if (len <= 7)
+	// else if (len == 5)
+	// 	sort_five(stack, stack->min);
+	// else if (len <= 100)
 	// 	sort_ten(stack, stack->min);
 	else //if (len <= 100)
-		sort_hundred(stack, &stack->a, 'a');
+		sort_hund(stack, lst, st);
+		// sort_hundred(stack, &stack->a, 'a');
 }
 
+void	sort_bylen_max(t_stc *stack, t_list **lst, char st, int len)
+{
+	if (len == 2)
+		sort_two_max(lst, st);
+	else if (len == 3)
+		sort_three_max(stack, lst, st);
+}
 void	sort_ab(t_stc *stack, int c)
 {
 	t_list	*a;

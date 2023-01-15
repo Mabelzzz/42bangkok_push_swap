@@ -17,6 +17,7 @@ SRCS = 	check_error.c \
 		push_swap.c \
 		utils_lst.c \
 		utils.c \
+		sort_100.c \
 
 OBJS = $(SRCS:.c=.o)
 

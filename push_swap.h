@@ -26,6 +26,9 @@ typedef struct s_stc
 	int		range;
 	int		min;
 	int		push;
+	int		med;
+	int		len;
+	int		round;
 	t_list	*a;
 	t_list	*b;
 }	t_stc;
@@ -74,23 +77,33 @@ void	swap(t_list **lst, char st);
 void	ss(t_stc *stack);
 
 // push_swap.c
-void	sort_bylen(t_stc *stack, int len);
+void	init(t_stc *stack);
+void	sort_bylen_min(t_stc *stack, t_list **lst, char st, int len);
+void	sort_bylen_max(t_stc *stack, t_list **lst, char st, int len);
+// sort_bylen(t_stc *stack, int len);
 void	sort_ab(t_stc *stack, int c);
 void	sort_a(t_stc *stack, t_list *a, t_list *l_a, int c);
 void	sort_b(t_stc *stack, t_list *b, t_list *l_b, int c);
 int		check_sort(t_list *lst);
 
 // sort_three.c
-void	sort_two(t_stc *stack);
-// void	sort_three(t_stc *stack);
-void	sort_three(t_stc *stack, t_list **lst, char st);
+void	sort_two_min(t_list **lst, char st);
+void	sort_two_max(t_list **lst, char st);
+void	sort_three_min(t_stc *stack, t_list **lst, char st);
+void	sort_three_max(t_stc *stack, t_list **lst, char st);
+
 void	set_val(t_stc *stack, char st);
 void	set_index(t_stc *stack);
 
 // sort_hundred.c
 void	sort_hundred(t_stc *stack, t_list **lst, char st);
+void	sort_hund(t_stc *stack, t_list **lst, char st);
+int		quick_sort_pb(t_stc *stack, t_list **lst, char st);
+int		quick_sort_pa(t_stc *stack, t_list **lst, char st);
 void	find_max(t_stc *stack);
 void	push_b(t_stc *stack, int ck);
+void	send_back_a(t_stc *stack);
+void	send_back_b(t_stc *stack);
 
 // sort_five.c
 void	sort_four(t_stc *stack, int min);

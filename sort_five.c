@@ -20,16 +20,12 @@ void	sort_ten(t_stc *stack, int min)
 {
 	int		i;
 
-	i = -1;
+	i = 0;
 	while (++i < stack->cnt - 5)
-	{
 		push_min_b(stack, min + i);
-		// if (i > 1)
-		// 	sort_ab(stack);
-	}
 	min = i;
 	sort_five(stack, min);
-	i = -1;
+	i = 0;
 	while (++i < stack->cnt - 5)
 		pa(stack);
 }
@@ -38,8 +34,8 @@ void	push_min_b(t_stc *stack, int id)
 {
 	t_list	*tmp;
 	// t_list	*last;
-
 	tmp = stack->a;
+	// printf("tmp id = %d\n", tmp->id);
 	// last = ft_lstlast(tmp);
 	if (tmp->id == id)
 	{
@@ -48,11 +44,12 @@ void	push_min_b(t_stc *stack, int id)
 	}
 	else if (tmp->next->id == id && tmp->id <= stack->cnt / 2)
 		swap(&stack->a, 'a');
-	else if (tmp->next->id == id && tmp->id > stack->cnt / 2)
+	else if (tmp->id > stack->cnt / 2)
 		rotate(&stack->a, 'a');
 	// else if (last->id == id)
 	else
 		reverse_rotate(&stack->a, 'a');
+
 	push_min_b(stack, id);
 }
 
@@ -76,5 +73,7 @@ void	push_min_b3(t_stc *stack, int id)
 		rotate(&stack->a, 'a');
 	else if (last->id == id || last->id == id + 1 || last->id == id + 2)
 		reverse_rotate(&stack->a, 'a');
-	push_min_b(stack, id);
+	push_min_b3(stack, id);
 }
+
+

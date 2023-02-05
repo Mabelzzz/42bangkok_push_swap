@@ -57,7 +57,7 @@
 void	init(t_stc *stack)
 {
 	stack->cnt = 0;
-	stack->min = 0;
+	stack->min = 1;
 	stack->push = 0;
 	stack->med = 0;
 	stack->round = 0;
@@ -78,9 +78,9 @@ int	main(int argc, char **argv)
 	if (check_duplicate(&stack.a) == 1)
 		error_free(&stack);
 	set_index(&stack);
-	stack.chunk = (stack.cnt / 100) + 3;
-	// stack.chunk = 3;
-	stack.range = stack.cnt / stack.chunk;
+	// stack.chunk = (stack.cnt / 100) + 3;
+	// // stack.chunk = 3;
+	// stack.range = stack.cnt / stack.chunk;
 	sort_bylen_min(&stack, &stack.a, 'a', stack.cnt);
 	while (stack.a)
 	{
@@ -103,12 +103,12 @@ void	sort_bylen_min(t_stc *stack, t_list **lst, char st, int len)
 		sort_two_min(lst, st);
 	else if (len == 3)
 		sort_three_min(stack, lst, st);
-	// else if (len == 4)
-	// 	sort_four(stack, stack->min);
-	// else if (len == 5)
-	// 	sort_five(stack, stack->min);
-	// else if (len <= 100)
-	// 	sort_ten(stack, stack->min);
+	else if (len == 4)
+		sort_four(stack, stack->min);
+	else if (len == 5)
+		sort_five(stack, stack->min);
+	else if (len <= 10)
+		sort_ten(stack, stack->min);
 	else //if (len <= 100)
 		sort_hund(stack, lst, st);
 		// sort_hundred(stack, &stack->a, 'a');

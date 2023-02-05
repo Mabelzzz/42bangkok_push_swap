@@ -110,6 +110,7 @@ void	sort_four(t_stc *stack, int min);
 void	sort_five(t_stc *stack, int min);
 void	sort_ten(t_stc *stack, int min);
 void	push_min_b(t_stc *stack, int id);
+void	push_min_b3(t_stc *stack, int id);
 
 // utils.c
 int		ft_atoi (char *s);

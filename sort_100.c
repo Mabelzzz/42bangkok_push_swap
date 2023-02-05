@@ -4,17 +4,17 @@ void	sort_hund(t_stc *stack, t_list **lst, char st)
 {
 	stack->len = stack->cnt;
 	quick_sort_pb(stack, lst, st);
-	sort_bylen_min(stack, &stack->a, 'a', stack->cnt - stack->push);
-	sort_bylen_max(stack, &stack->b, 'b', 3);
-	send_back_a(stack);
-	stack->len = stack->push;
-	stack->med = 0;
-	stack->round = 0;
-	quick_sort_pa(stack, &stack->b, 'b');
-	sort_bylen_max(stack, &stack->b, 'b', 3);
-	sort_bylen_min(stack, &stack->a, 'a', 3);
-	send_back_b(stack);
-	printf("len %d med %d push %d\n", stack->cnt - stack->push, stack->med, stack->push);
+	// sort_bylen_min(stack, &stack->a, 'a', stack->cnt - stack->push);
+	// sort_bylen_max(stack, &stack->b, 'b', 3);
+	// send_back_a(stack);
+	// stack->len = stack->push;
+	// stack->med = 0;
+	// stack->round = 0;
+	// quick_sort_pa(stack, &stack->b, 'b');
+	// sort_bylen_max(stack, &stack->b, 'b', 3);
+	// sort_bylen_min(stack, &stack->a, 'a', 3);
+	// send_back_b(stack);
+	// printf("len %d med %d push %d\n", stack->cnt - stack->push, stack->med, stack->push);
 }
 
 void	send_back_a(t_stc *stack)
@@ -58,16 +58,17 @@ int	quick_sort_pb(t_stc *stack, t_list **lst, char st)
 	if (stack->push == stack->med)
 	{
 		stack->round++;
-		if(stack->len % 2 == 0 && stack->len > 4)
-			stack->med = stack->med + (stack->len / 2);
-		else if (stack->len % 2 != 0 && stack->len > 4)
-			stack->med = stack->med + ((stack->len + 1) / 2);
+		if(stack->len > 4)
+			stack->med = stack->med + (stack->len / 2 + stack->len % 2);
+		// else if (stack->len % 2 != 0 && stack->len > 4)
+			// stack->med = stack->med + ((stack->len + 1) / 2);
 		else
 			return (stack->len);
 		stack->len = stack->cnt - stack->med;
 	}
 	if((*lst)->id <= stack->med)
 	{
+		printf("pb id = %d med = %d-----------\n",(*lst)->id, stack->med);
 		pb(stack);
 		stack->push++;
 	}

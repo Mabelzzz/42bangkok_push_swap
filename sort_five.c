@@ -2,9 +2,19 @@
 
 void	sort_four(t_stc *stack, int min)
 {
-	push_min_b(stack, min);
+	// printf("min = %d \n", min);
+	while (min <= stack->cnt - 3)
+	{
+		push_min_b(stack, min);
+		min++;
+	}
+	min = stack->min;
 	sort_three_min(stack, &stack->a, 'a');
-	pa(stack);
+	while (min <= stack->cnt - 3)
+	{
+		pa(stack);
+		min++;
+	}
 }
 
 void	sort_five(t_stc *stack, int min)
@@ -21,34 +31,36 @@ void	sort_ten(t_stc *stack, int min)
 	int		i;
 
 	i = 0;
-	while (++i < stack->cnt - 5)
-		push_min_b(stack, min + i);
-	min = i;
-	sort_five(stack, min);
-	i = 0;
-	while (++i < stack->cnt - 5)
-		pa(stack);
+	printf("min = %d | i = %d\n", min, i);
+	while (++i <= stack->cnt - 5)
+		push_min_b3(stack, i);
+		printf("--min = %d | i = %d\n", min, i);
+	// min = i;
+	// sort_five(stack, min);
+	// i = 0;
+	// while (++i <= stack->cnt - 5)
+	// 	pa(stack);
 }
 
 void	push_min_b(t_stc *stack, int id)
 {
 	t_list	*tmp;
-	// t_list	*last;
+	t_list	*last;
 	tmp = stack->a;
 	// printf("tmp id = %d\n", tmp->id);
-	// last = ft_lstlast(tmp);
+	last = ft_lstlast(tmp);
 	if (tmp->id == id)
 	{
 		pb(stack);
 		return ;
 	}
-	else if (tmp->next->id == id && tmp->id <= stack->cnt / 2)
+	else if (tmp->next->id == id)
 		swap(&stack->a, 'a');
-	else if (tmp->id > stack->cnt / 2)
-		rotate(&stack->a, 'a');
-	// else if (last->id == id)
-	else
+	else if (last->id == id)
 		reverse_rotate(&stack->a, 'a');
+	else
+	// else if (tmp->id > stack->cnt / 2)
+		rotate(&stack->a, 'a');
 
 	push_min_b(stack, id);
 }

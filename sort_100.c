@@ -2,8 +2,21 @@
 
 void	sort_hund(t_stc *stack, t_list **lst, char st)
 {
+	int n;
+	int x;
+
+    // l = stack->len;
+	(void)lst;
+	(void)st;
+    n = 0;
+	x = stack->len;
 	stack->len = stack->cnt;
-	quick_sort_pb(stack, lst, st);
+    while (x > 5)
+    {
+        x = stack->len / (2^n);
+        n++;
+		printf("x = %d | n = %d\n", x, n);
+    }
 	// sort_bylen_min(stack, &stack->a, 'a', stack->cnt - stack->push);
 	// sort_bylen_max(stack, &stack->b, 'b', 3);
 	// send_back_a(stack);
@@ -16,6 +29,7 @@ void	sort_hund(t_stc *stack, t_list **lst, char st)
 	// send_back_b(stack);
 	// printf("len %d med %d push %d\n", stack->cnt - stack->push, stack->med, stack->push);
 }
+
 
 void	send_back_a(t_stc *stack)
 {

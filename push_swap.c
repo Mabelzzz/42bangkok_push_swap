@@ -54,6 +54,7 @@
 	// 	stack.a = stack.a->next;
 	// }
 // }
+
 void	init(t_stc *stack)
 {
 	stack->cnt = 0;
@@ -78,20 +79,20 @@ int	main(int argc, char **argv)
 	if (check_duplicate(&stack.a) == 1)
 		error_free(&stack);
 	set_index(&stack);
-	// stack.chunk = (stack.cnt / 100) + 3;
+	stack.chunk = (stack.cnt / 100) + 3;
 	// // stack.chunk = 3;
 	// stack.range = stack.cnt / stack.chunk;
 	sort_bylen_min(&stack, &stack.a, 'a', stack.cnt);
-	while (stack.a)
-	{
-		printf("a = %d ---- id = %d\n", stack.a->val, stack.a->id);
-		stack.a = stack.a->next;
-	}
-	while (stack.b)
-	{
-		printf("b = %d ---- id = %d\n", stack.b->val, stack.b->id);
-		stack.b = stack.b->next;
-	}
+	// while (stack.a)
+	// {
+	// 	printf("a = %d ---- id = %d\n", stack.a->val, stack.a->id);
+	// 	stack.a = stack.a->next;
+	// }
+	// while (stack.b)
+	// {
+	// 	printf("b = %d ---- id = %d\n", stack.b->val, stack.b->id);
+	// 	stack.b = stack.b->next;
+	// }
 	free_stack_tmp(&stack);
 	free_lst(stack.a);
 	free_lst(stack.b);
@@ -99,18 +100,20 @@ int	main(int argc, char **argv)
 
 void	sort_bylen_min(t_stc *stack, t_list **lst, char st, int len)
 {
+	// printf("len = %d | min = %d\n", len, stack->min);
 	if (len == 2)
 		sort_two_min(lst, st);
 	else if (len == 3)
 		sort_three_min(stack, lst, st);
-	else if (len == 4)
+	// else if (len < 10)
+	else
 		sort_four(stack, stack->min);
-	else if (len == 5)
-		sort_five(stack, stack->min);
-	else if (len <= 10)
-		sort_ten(stack, stack->min);
-	else //if (len <= 100)
-		sort_hund(stack, lst, st);
+	// else if (len == 5)
+	// 	sort_five(stack, stack->min);
+	// else if (len <= 10)
+	// 	sort_ten(stack, stack->min);
+	// else //if (len <= 100)
+		// sort_hund(stack, lst, st);
 		// sort_hundred(stack, &stack->a, 'a');
 }
 

@@ -106,8 +106,10 @@ void	sort_bylen_min(t_stc *stack, t_list **lst, char st, int len)
 	else if (len == 3)
 		sort_three_min(stack, lst, st);
 	// else if (len < 10)
-	else
+	else if (len == 4)
 		sort_four(stack, stack->min);
+	else
+		sort_stack(lst, stack);
 	// else if (len == 5)
 	// 	sort_five(stack, stack->min);
 	// else if (len <= 10)
@@ -224,4 +226,5 @@ int	check_sort(t_list *lst)
 	}
 	return (0);
 }
+
 

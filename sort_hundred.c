@@ -63,11 +63,11 @@ void	push_b(t_stc *stack, int ck)
 void	find_max(t_stc *stack)
 {
 	// t_list	*last;
-	int		r;
+	// int		r;
 	int		c;
 
 	c = 1;
-	r = stack->range;
+	// r = stack->range;
 	while (stack->push < stack->cnt - stack->range)
 	// while (stack->push <  2)
 	{

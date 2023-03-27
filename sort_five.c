@@ -89,3 +89,69 @@ void	push_min_b3(t_stc *stack, int id)
 }
 
 
+void sort_stack(t_list **lst, t_stc *stack)
+{
+	int sz;
+	int pivot;
+	int pushed;
+
+	(void) lst;
+	sz = stack_size(stack->a, stack);
+    if (sz <= 1)
+        return ;
+	pivot = ((sz / 2) + (sz % 2));
+	pushed = 0;
+    while (check_sort(stack->a))
+    {
+        if (stack_top(stack->a) < pivot)
+        {
+            pb(stack);
+            pushed++;
+        }
+        else
+			rotate(&stack->a, 'a');
+	}
+
+	while (pushed--)
+		pa(stack);
+    // sort_stack(lst, stack);
+    while (stack_size(stack->b, stack))
+        pa(stack);
+}
+
+// Sorts stack a using the quicksort algorithm
+// void quicksort(t_stc *a, t_stc *b, int size)
+// {
+//     if (size <= 3)
+//     {
+//         sort_small(a, b, size);
+//         return ;
+//     }
+// 	int	sz;
+//     int pivot;
+
+// 	sz = stack_size(stack->a, stack);
+// 	pivot = ((sz / 2) + (sz % 2));
+//     int ra_count = 0;
+//     int pb_count = 0;
+//     while (size--)
+//     {
+//         if (a->top->data <= pivot)
+//         {
+//             push(b, a, "pb\n");
+//             pb_count++;
+//         }
+//         else
+//         {
+//             rotate(a, "ra\n");
+//             ra_count++;
+//         }
+//     }
+//     while (ra_count--)
+//         reverse_rotate(a, "rra\n");
+//     quicksort(a, b, pb_count);
+//     while (pb_count--)
+//         push(a, b, "pa\n");
+//     quicksort(a, b, a->size);
+// }
+

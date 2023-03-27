@@ -111,6 +111,7 @@ void	sort_five(t_stc *stack, int min);
 void	sort_ten(t_stc *stack, int min);
 void	push_min_b(t_stc *stack, int id);
 void	push_min_b3(t_stc *stack, int id);
+void 	sort_stack(t_list **lst, t_stc *stack);
 
 // utils.c
 int		ft_atoi (char *s);
@@ -120,8 +121,12 @@ void	error(void);
 void	error_free(t_stc *stack);
 void	free_stack_tmp(t_stc *stack);
 void	free_lst(t_list *lst);
+int		stack_size(t_list	*stc, t_stc *stack);
+int stack_top(t_list	*stc);
 
 // utils_list.c
+
+
 t_list	*ft_lstlast(t_list *lst);
 // t_list	*ft_lstnew(int val);
 void	ft_lstadd_back(t_list **lst, t_list *new);

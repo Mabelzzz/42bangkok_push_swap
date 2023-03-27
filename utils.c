@@ -82,3 +82,24 @@ void	free_stack_tmp(t_stc *stack)
 	}
 	free(stack->tmp);
 }
+
+int	stack_size(t_list	*stc, t_stc *stack)
+{
+	t_list *tmp;
+	int		i;
+
+	i = 0;
+	tmp = stc;
+	while (tmp)
+	{
+		i++;
+		tmp++;
+	}
+	set_index(stack);
+	return (i);
+}
+
+int stack_top(t_list	*stc)
+{
+	return (stc->id);
+}

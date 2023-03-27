@@ -7,10 +7,10 @@ void	get_val(t_stc *stack, int argc, char **argv)
 {
 	int		i;
 	int		j;
-	int		nbr;
+	// int		nbr;
 
 	i = 0;
-	nbr = 0;
+	// nbr = 0;
 	stack->tmp = malloc(sizeof(char **) * (argc));
 	while (i < argc - 1)
 	{
@@ -19,7 +19,7 @@ void	get_val(t_stc *stack, int argc, char **argv)
 		while (stack->tmp[i][j])
 		{
 			check_nbr(stack->tmp[i][j], stack);
-			nbr = ft_atoi(stack->tmp[i][j]);
+			// nbr = ft_atoi(stack->tmp[i][j]);
 			stack->cnt++;
 			j++;
 		}

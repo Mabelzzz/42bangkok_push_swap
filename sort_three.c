@@ -1,57 +1,57 @@
 #include "push_swap.h"
 
-void	sort_two_min(t_list **lst, char st);
-void	sort_two_max(t_list **lst, char st);
-void	sort_three_min(t_stc *stack, t_list **lst, char st);
-void	sort_three_max(t_stc *stack, t_list **lst, char st);
-// void	sort_three_b(t_stc *stack);
-void	set_val(t_stc *stack, char st);
-void	set_index(t_stc *stack);
+// void	sort_two_min(t_list **lst, char st);
+// void	sort_two_max(t_list **lst, char st);
+// void	sort_three_min(t_stc *stack, t_list **lst, char st);
+// void	sort_three_max(t_stc *stack, t_list **lst, char st);
+// // void	sort_three_b(t_stc *stack);
+// void	set_val(t_stc *stack, char st);
+// void set_index(t_list *stack);
 
-void	sort_two_min(t_list **lst, char st)
+void	sort_two(t_stc *stack)
 {
-	if ((*lst)->val > (*lst)->next->val)
-		swap(lst, st);
+	if (stack->a->val > stack->a->next->val)
+		sa(stack);
 }
 
-void	sort_two_max(t_list **lst, char st)
+// void	sort_two_max(t_list **lst)
+// {
+// 	if ((*lst)->val < (*lst)->next->val)
+// 		sa(lst);
+// }
+void	sort_three(t_stc *stack)
 {
-	if ((*lst)->val < (*lst)->next->val)
-		swap(lst, st);
-}
-void	sort_three_min(t_stc *stack, t_list **lst, char st)
-{
-	set_val(stack, st);
+	set_val(stack, 'a');
 	if (stack->x < stack->y && stack->x < stack->z && stack->y > stack->z)
-		swap(lst, st);
+		sa(stack);
 	if (stack->x > stack->y && stack->x < stack->z && stack->y < stack->z)
-		swap(lst, st);
+		sa(stack);
 	if (stack->x > stack->y && stack->x > stack->z && stack->y > stack->z)
-		swap(lst, st);
-	set_val(stack, st);
+		sa(stack);
+	set_val(stack, 'a');
 	if (stack->x < stack->y && stack->x > stack->z && stack->y > stack->z)
-		reverse_rotate(lst, st);
-	set_val(stack, st);
+		rra(stack);
+	set_val(stack, 'a');
 	if (stack->x > stack->y && stack->x > stack->z && stack->y < stack->z)
-		rotate(lst, st);
+		ra(stack);
 }
 
-void	sort_three_max(t_stc *stack, t_list **lst, char st)
-{
-	set_val(stack, st);
-	if (stack->x > stack->y && stack->x > stack->z && stack->y < stack->z)
-		swap(lst, st);
-	if (stack->x < stack->y && stack->x > stack->z && stack->y > stack->z)
-		swap(lst, st);
-	if (stack->x < stack->y && stack->x < stack->z && stack->y < stack->z)
-		swap(lst, st);
-	set_val(stack, st);
-	if (stack->x > stack->y && stack->x < stack->z && stack->y < stack->z)
-		reverse_rotate(lst, st);
-	set_val(stack, st);
-	if (stack->x < stack->y && stack->x < stack->z && stack->y > stack->z)
-		rotate(lst, st);
-}
+// void	sort_three_max(t_stc *stack, t_list **lst, char st)
+// {
+// 	set_val(stack, st);
+// 	if (stack->x > stack->y && stack->x > stack->z && stack->y < stack->z)
+// 		swap(lst, st);
+// 	if (stack->x < stack->y && stack->x > stack->z && stack->y > stack->z)
+// 		swap(lst, st);
+// 	if (stack->x < stack->y && stack->x < stack->z && stack->y < stack->z)
+// 		swap(lst, st);
+// 	set_val(stack, st);
+// 	if (stack->x > stack->y && stack->x < stack->z && stack->y < stack->z)
+// 		reverse_rotate(lst, st);
+// 	set_val(stack, st);
+// 	if (stack->x < stack->y && stack->x < stack->z && stack->y > stack->z)
+// 		rotate(lst, st);
+// }
 // void	sort_three(t_list **stack)
 // {
 // 	set_val(stack);
@@ -85,7 +85,7 @@ void set_val(t_stc *stack, char st)
 	}
 }
 
-void set_index(t_stc *stack)
+void set_index(t_list *stack)
 {
 	t_list	*cur;
 	t_list	*check;
@@ -93,11 +93,11 @@ void set_index(t_stc *stack)
 	int		j;
 
 	j = 0;
-	cur = stack->a;
+	cur = stack;
 	while (cur)
 	{
 		i = 1;
-		check = stack->a;
+		check = stack;
 		while (check)
 		{
 			if (cur->val > check->val)

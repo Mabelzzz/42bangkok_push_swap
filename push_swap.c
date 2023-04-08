@@ -78,19 +78,19 @@ int	main(int argc, char **argv)
 	get_list(&stack);
 	if (check_duplicate(&stack.a) == 1)
 		error_free(&stack);
-	set_index(&stack);
-	stack.chunk = (stack.cnt / 100) + 3;
+	// set_index(stack);
+	// stack.chunk = (stack.cnt / 100) + 3;
 	// // stack.chunk = 3;
 	// stack.range = stack.cnt / stack.chunk;
-	sort_bylen_min(&stack, &stack.a, 'a', stack.cnt);
+	sort_by_len(&stack, &stack.a, stack.cnt);
 	// while (stack.a)
 	// {
-	// 	printf("a = %d ---- id = %d\n", stack.a->val, stack.a->id);
+	// 	printf("|a = %d ---- id = %d\n", stack.a->val, stack.a->id);
 	// 	stack.a = stack.a->next;
 	// }
 	// while (stack.b)
 	// {
-	// 	printf("b = %d ---- id = %d\n", stack.b->val, stack.b->id);
+	// 	printf("|b = %d ---- id = %d\n", stack.b->val, stack.b->id);
 	// 	stack.b = stack.b->next;
 	// }
 	free_stack_tmp(&stack);
@@ -98,18 +98,22 @@ int	main(int argc, char **argv)
 	free_lst(stack.b);
 }
 
-void	sort_bylen_min(t_stc *stack, t_list **lst, char st, int len)
+void	sort_by_len(t_stc *stack, t_list **lst, int len)
 {
+	set_index(stack->a);
 	// printf("len = %d | min = %d\n", len, stack->min);
-	if (len == 2)
-		sort_two_min(lst, st);
+	if (len == 1)
+		return ;
+	else if (len == 2)
+		sort_two(stack);
 	else if (len == 3)
-		sort_three_min(stack, lst, st);
+		sort_three(stack);
 	// else if (len < 10)
-	else if (len == 4)
+	else if (len <= 5)
 		sort_four(stack, stack->min);
 	else
-		sort_stack(lst, stack);
+		quicksort(lst, stack, len);
+		// sort_stack(lst, stack);
 	// else if (len == 5)
 	// 	sort_five(stack, stack->min);
 	// else if (len <= 10)
@@ -117,107 +121,109 @@ void	sort_bylen_min(t_stc *stack, t_list **lst, char st, int len)
 	// else //if (len <= 100)
 		// sort_hund(stack, lst, st);
 		// sort_hundred(stack, &stack->a, 'a');
+		// sort_ab(stack, 2);
 }
 
-void	sort_bylen_max(t_stc *stack, t_list **lst, char st, int len)
-{
-	if (len == 2)
-		sort_two_max(lst, st);
-	else if (len == 3)
-		sort_three_max(stack, lst, st);
-}
-void	sort_ab(t_stc *stack, int c)
-{
-	t_list	*a;
-	t_list	*b;
-	t_list	*l_a;
-	t_list	*l_b;
+// void	sort_bylen_max(t_stc *stack, t_list **lst, char st, int len)
+// {
+// 	if (len == 2)
+// 		sort_two_max(lst, st);
+// 	else if (len == 3)
+// 		sort_three_max(stack, lst, st);
+// }
+// void	sort_ab(t_stc *stack, int c)
+// {
+// 	t_list	*a;
+// 	t_list	*b;
+// 	t_list	*l_a;
+// 	t_list	*l_b;
 
-	a = stack->a;
-	b = stack->b;
-	l_a = ft_lstlast(stack->a);
-	l_b = ft_lstlast(stack->b);
-	if (a->id < stack->range * c)
-	{
-		pb(stack);
-		stack->push++;
-	}
-	a = stack->a;
-	b = stack->b;
-	l_a = ft_lstlast(stack->a);
-	l_b = ft_lstlast(stack->b);
-	if (b)
-	{
-		if (a->next->id < stack->range * c && a->id <= stack->range * c / 2
-			&& b->id > b->next->id && b->id <= stack->range * c / 2)
-			ss(stack);
-		else if (a->next->id < stack->range * c && a->id > stack->range * c / 2
-			&& b->id > b->next->id && b->id > stack->range * c / 2)
-			rr(stack);
-		else if (l_a->id < stack->range * c && l_a->id <= stack->range * c / 2
-			&& l_b->id < b->id && l_b->id <= stack->range * c / 2)
-			rrr(stack);
-	}
-	a = stack->a;
-	b = stack->b;
-	l_a = ft_lstlast(stack->a);
-	l_b = ft_lstlast(stack->b);
-	if (a->next->id < stack->range * c && a->id <= stack->range * c / 2)
-		swap(&stack->a, 'a');
-	else if (a->next->id < stack->range * c && a->id > stack->range * c / 2)
-		rotate(&stack->a, 'a');
-	else if (l_a->id < stack->range * c && l_a->id <= stack->range * c / 2)
-		reverse_rotate(&stack->a, 'a');
-	else
-		rotate(&stack->a, 'a');
-	// else if (b->id > b->next->id && b->id < stack->range * c / 2 && stack->b)
-	// 	swap(&stack->b, 'b');
-	// else if (b->id > b->next->id && b->id > stack->range * c / 2 && stack->b)
-	// 	rotate(&stack->b, 'b');
-	// else if (l_b->id < b->id && l_b->id < stack->range * c / 2 && stack->b)
-	// 	reverse_rotate(&stack->b, 'b');
+// 	a = stack->a;
+// 	b = stack->b;
+// 	l_a = ft_lstlast(stack->a);
+// 	l_b = ft_lstlast(stack->b);
+// 	if (a->id < stack->range * c)
+// 	{
+// 		pb(stack);
+// 		stack->push++;
+// 	}
+// 	a = stack->a;
+// 	b = stack->b;
+// 	l_a = ft_lstlast(stack->a);
+// 	l_b = ft_lstlast(stack->b);
+// 	if (b)
+// 	{
+// 		if (a->next->id < stack->range * c && a->id <= stack->range * c / 2
+// 			&& b->id > b->next->id && b->id <= stack->range * c / 2)
+// 			ss(stack);
+// 		else if (a->next->id < stack->range * c && a->id > stack->range * c / 2
+// 			&& b->id > b->next->id && b->id > stack->range * c / 2)
+// 			rr(stack);
+// 		else if (l_a->id < stack->range * c && l_a->id <= stack->range * c / 2
+// 			&& l_b->id < b->id && l_b->id <= stack->range * c / 2)
+// 			rrr(stack);
+// 	}
+// 	a = stack->a;
+// 	b = stack->b;
+// 	l_a = ft_lstlast(stack->a);
+// 	l_b = ft_lstlast(stack->b);
+// 	if (a->next->id < stack->range * c && a->id <= stack->range * c / 2)
+// 		swap(&stack->a, 'a');
+// 	else if (a->next->id < stack->range * c && a->id > stack->range * c / 2)
+// 		rotate(&stack->a, 'a');
+// 	else if (l_a->id < stack->range * c && l_a->id <= stack->range * c / 2)
+// 		reverse_rotate(&stack->a, 'a');
+// 	else
+// 		rotate(&stack->a, 'a');
+// 	// else if (b->id > b->next->id && b->id < stack->range * c / 2 && stack->b)
+// 	// 	swap(&stack->b, 'b');
+// 	// else if (b->id > b->next->id && b->id > stack->range * c / 2 && stack->b)
+// 	// 	rotate(&stack->b, 'b');
+// 	// else if (l_b->id < b->id && l_b->id < stack->range * c / 2 && stack->b)
+// 	// 	reverse_rotate(&stack->b, 'b');
 
-	// if (check_sort(a) == 1 && check_sort(b) == 1)
-	// 	sort_ab(stack);
-	return ;
-}
+// 	// if (check_sort(a) == 1 && check_sort(b) == 1)
+// 	// 	sort_ab(stack);
+// 	return ;
+// }
 
-void	sort_a(t_stc *stack, t_list *a, t_list *l_a, int c)
-{
-	// t_list	*a;
-	// t_list	*l_a;
+// void	sort_a(t_stc *stack, t_list *a, t_list *l_a, int c)
+// {
+// 	// t_list	*a;
+// 	// t_list	*l_a;
 
-	a = stack->a;
-	l_a = ft_lstlast(stack->a);
-	if (a->next->id < stack->range * c && a->id <= stack->range * c / 2)
-		swap(&stack->a, 'a');
-	else if (a->next->id < stack->range * c && a->id > stack->range * c / 2)
-		rotate(&stack->a, 'a');
-	else if (l_a->id < stack->range * c && l_a->id <= stack->range * c / 2)
-		reverse_rotate(&stack->a, 'a');
-	else
-		rotate(&stack->a, 'a');
-}
+// 	a = stack->a;
+// 	l_a = ft_lstlast(stack->a);
+// 	if (a->next->id < stack->range * c && a->id <= stack->range * c / 2)
+// 		swap(&stack->a, 'a');
+// 	else if (a->next->id < stack->range * c && a->id > stack->range * c / 2)
+// 		rotate(&stack->a, 'a');
+// 	else if (l_a->id < stack->range * c && l_a->id <= stack->range * c / 2)
+// 		reverse_rotate(&stack->a, 'a');
+// 	else
+// 		rotate(&stack->a, 'a');
+// }
 
-void	sort_b(t_stc *stack, t_list *b, t_list *l_b, int c)
-{
-	// t_list	*b;
-	// t_list	*l_b;
+// void	sort_b(t_stc *stack, t_list *b, t_list *l_b, int c)
+// {
+// 	// t_list	*b;
+// 	// t_list	*l_b;
 
-	b = stack->b;
-	l_b = ft_lstlast(stack->b);
-	if (b->id < b->next->id && b->id >= stack->range * c / 2)
-		swap(&stack->b, 'b');
-	else if (b->id < b->next->id && b->id < stack->range * c / 2)
-		rotate(&stack->b, 'b');
-	else if (l_b->id > b->id && l_b->id > stack->range * c / 2)
-		reverse_rotate(&stack->b, 'b');
-	else
-		rotate(&stack->b, 'b');
-}
+// 	b = stack->b;
+// 	l_b = ft_lstlast(stack->b);
+// 	if (b->id < b->next->id && b->id >= stack->range * c / 2)
+// 		swap(&stack->b, 'b');
+// 	else if (b->id < b->next->id && b->id < stack->range * c / 2)
+// 		rotate(&stack->b, 'b');
+// 	else if (l_b->id > b->id && l_b->id > stack->range * c / 2)
+// 		reverse_rotate(&stack->b, 'b');
+// 	else
+// 		rotate(&stack->b, 'b');
+// }
 
 int	check_sort(t_list *lst)
 {
+	// set_index(lst);
 	while (lst)
 	{
 		if (lst->id > lst->next->id)

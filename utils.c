@@ -85,17 +85,41 @@ void	free_stack_tmp(t_stc *stack)
 
 int	stack_size(t_list	*stc, t_stc *stack)
 {
-	t_list *tmp;
+	t_list	*cur;
 	int		i;
-
+	(void) stack;
 	i = 0;
-	tmp = stc;
-	while (tmp)
+	cur = stc;
+	while (cur)
 	{
 		i++;
-		tmp++;
+		cur = cur->next;
 	}
-	set_index(stack);
+	set_index(stc);
+	return (i);
+}
+
+int	find_stack(t_list	*stc, t_stc *stack, int nbr)
+{
+	t_list	*cur;
+	int		i;
+	(void) stack;
+	i = 0;
+	cur = stc;
+	while (cur)
+	{
+		if (cur->id == nbr)
+		{
+			if (i < stack_size(stc, stack)/2) //top
+				return (0);
+			else
+				return (1); //down
+		}
+			return (i);
+		i++;
+		cur = cur->next;
+	}
+	// set_index(stc);
 	return (i);
 }
 

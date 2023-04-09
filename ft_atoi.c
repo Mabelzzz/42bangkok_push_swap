@@ -11,8 +11,8 @@ int	ft_atoi (char *s)
 	result = 0;
 	while (s[i] == ' ')
 		i++;
-	if (s[i] == '0')
-		printf("Error\n");
+	// if (s[i] == '0')
+	// 	printf("Error\n");
 	if (s[i] == '-')
 	{
 		sign = -1;

@@ -18,8 +18,8 @@ int	ft_atoi (char *s)
 	result = 0;
 	while (s[i] == ' ')
 		i++;
-	if (s[i] == '0')
-		error();
+	// if (s[i] == '0')
+	// 	error();
 	if (s[i] == '-')
 	{
 		sign = -1;
@@ -50,7 +50,7 @@ void	put_st(char st)
 
 void	error(void)
 {
-	putstr("Error\n");
+	putstr("Error99\n");
 	exit(0);
 }
 
@@ -95,10 +95,26 @@ int	stack_size(t_list	*stc, t_stc *stack)
 		i++;
 		cur = cur->next;
 	}
-	set_index(stc);
+	// set_index(stc);
 	return (i);
 }
 
+void	find_min_max_idex(t_list	*stc, t_stc *stack)
+{
+	t_list	*cur;
+
+	cur = stc;
+	stack->min = cur->id;
+	stack->max = cur->id;
+	while (cur)
+	{
+		if (cur->id > stack->max)
+			stack->max = cur->id;
+		if (cur->id < stack->min)
+			stack->min = cur->id;
+		cur = cur->next;
+	}
+}
 int	find_stack(t_list	*stc, t_stc *stack, int nbr)
 {
 	t_list	*cur;
@@ -126,4 +142,12 @@ int	find_stack(t_list	*stc, t_stc *stack, int nbr)
 int stack_top(t_list	*stc)
 {
 	return (stc->id);
+}
+
+int cnt_tmp_size(t_list *stc, int id)
+{
+	while(stc)
+	{
+		if (stc->chunk_id)
+	}
 }

@@ -12,6 +12,7 @@ typedef struct s_list
 	int				val;
 	int				id;
 	int				tmp_id;
+	int				chunk_id;
 	int				i;
 	struct s_list	*next;
 }	t_list;
@@ -23,13 +24,26 @@ typedef struct s_stc
 	int		x;
 	int		y;
 	int		z;
-	int		chunk;
+	int		chunk_size;
 	int		range;
 	int		min;
-	int		push;
+	int		max;
+	int		size_a;
+	int		size_b;
+	int		lower;
+	int		upper;
+	int		push_a;
+	int		push_b;
 	int		med;
 	int		len;
 	int		round;
+	int		pb_cnt;
+	int		pa_cnt;
+	int		ra_cnt;
+	int		rb_cnt;
+	int		rra_cnt;
+	int		rrb_cnt;
+	int		tmp_sz;
 	t_list	*a;
 	t_list	*b;
 }	t_stc;
@@ -115,7 +129,8 @@ void	push_min_b3(t_stc *stack, int id);
 // void 	sort_stack(t_list **lst, t_stc *stack);
 int	quicksort(t_list **lst, t_stc *stack, int size);
 int quicksort_back(t_list **lst, t_stc *stack);
-
+int qs_pb(t_list **lst, t_stc *stack, int size);
+int qs_pa(t_list **lst, t_stc *stack, int size);
 // utils.c
 int		ft_atoi (char *s);
 void	putstr(char *str);
@@ -127,6 +142,7 @@ void	free_lst(t_list *lst);
 int		stack_size(t_list	*stc, t_stc *stack);
 int		stack_top(t_list	*stc);
 int		find_stack(t_list	*stc, t_stc *stack, int nbr);
+void	find_min_max_idex(t_list	*stc, t_stc *stack);
 // utils_list.c
 
 

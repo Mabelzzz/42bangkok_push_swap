@@ -5,6 +5,7 @@ FLAGS = -Wall -Wextra -Werror
 HEAD = -Imlx
 
 SRCS = 	check_error.c \
+		qs.c \
 		ft_split.c \
 		get_input.c \
 		oprt_push.c \

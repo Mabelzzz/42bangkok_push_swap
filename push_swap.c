@@ -58,10 +58,21 @@
 void	init(t_stc *stack)
 {
 	stack->cnt = 0;
+	stack->chunk_size = 0;
+	stack->lower = 0;
+	stack->upper = 0;
 	stack->min = 1;
-	stack->push = 0;
+	stack->max = 0;
+	stack->push_b = 0;
+	stack->push_a = 0;
 	stack->med = 0;
 	stack->round = 0;
+	stack->pb_cnt = 0;
+	stack->pa_cnt = 0;
+	stack->ra_cnt = 0;
+	stack->rb_cnt = 0;
+	stack->rra_cnt = 0;
+	stack->rrb_cnt = 0;
 	stack->a = NULL;
 	stack->b = NULL;
 	stack->tmp = NULL;
@@ -82,6 +93,7 @@ int	main(int argc, char **argv)
 	// stack.chunk = (stack.cnt / 100) + 3;
 	// // stack.chunk = 3;
 	// stack.range = stack.cnt / stack.chunk;
+	set_index(stack.a);
 	sort_by_len(&stack, &stack.a, stack.cnt);
 	// while (stack.a)
 	// {
@@ -100,7 +112,6 @@ int	main(int argc, char **argv)
 
 void	sort_by_len(t_stc *stack, t_list **lst, int len)
 {
-	set_index(stack->a);
 	// printf("len = %d | min = %d\n", len, stack->min);
 	if (len == 1)
 		return ;

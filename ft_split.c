@@ -60,8 +60,8 @@ char	**ft_split(char *s, char c)
 	size_t	cnt;
 
 	cnt = cnt_word(s, c);
-	if (cnt == 0)
-		error();
+	// if (cnt == 0)
+	// 	error();
 	if (!s)
 		return (NULL);
 	word = (char **)malloc(sizeof(char *) * (cnt + 1));
